@@ -196,8 +196,8 @@ function renderProjects() {
 
         const cardHTML = `
             <div class="group bg-white dark:bg-slate-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-slate-100 dark:border-slate-700 flex flex-col h-full overflow-hidden cursor-pointer" onclick="openModal(${originalIndex})">
-                <div class="overflow-hidden relative">
-                    <img class="w-full aspect-video object-cover transform group-hover:scale-110 transition-transform duration-700" src="${imageUrl}" alt="${project.title}">
+                <div class="overflow-hidden relative bg-slate-50 dark:bg-slate-900 flex items-center justify-center">
+                    <img class="w-full aspect-video object-contain p-4 transform group-hover:scale-110 transition-transform duration-700" src="${imageUrl}" alt="${project.title}">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                         <span class="text-white font-bold bg-blue-600/80 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-400/50 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                             ${t('card_inspect')}
@@ -241,7 +241,9 @@ function openModal(index) {
             <i class="fa-solid fa-xmark text-xl"></i>
         </button>
         
-        <img src="${imageUrl}" class="w-full h-64 md:h-80 object-cover" alt="${project.title}">
+        <div class="w-full h-64 md:h-80 bg-slate-50 dark:bg-slate-900 flex items-center justify-center p-6">
+            <img src="${imageUrl}" class="max-w-full max-h-full object-contain" alt="${project.title}">
+        </div>
         
         <div class="p-8">
             <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white mb-4">${project.title}</h2>
