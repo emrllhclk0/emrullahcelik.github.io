@@ -11,7 +11,16 @@ jobs:
     steps:
       - name: Supabase API İstegi
         run: |
-          curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" \
+          HTTP_STATUS=$(curl -s -o response.txt -w "%{http_code}" \
           -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-          "${{ secrets.SUPABASE_URL }}/rest/v1/projects?select=*&limit=1"
+          "${{ secrets.SUPABASE_URL }}/rest/v1/projects?select=*&limit=1")
+          
+          echo "HTTP Status: $HTTP_STATUS"
+          cat response.txt
+          echo ""
+          
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "Hata: API istegi basarisiz oldu! (Status: $HTTP_STATUS)"
+            exit 1
+          fi
